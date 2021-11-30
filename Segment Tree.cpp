@@ -1,10 +1,9 @@
-struct data
-{
-	//Use required attributes
-	int mn;
 
+struct data{
+	//Use required attributes
+	int val;
 	//Default Values
-	data() : mn(1e9) {};
+	data() : val(0) {};
 };
 
 struct SegTree
@@ -25,7 +24,7 @@ struct SegTree
 	//Write reqd merge functions
 	void merge(data &cur, data &l, data &r) 
 	{
-		cur.mn = min(l.mn, r.mn);
+		cur.val = (l.val, r.val)%mod;
 	}
 	
 	//Handle lazy propagation appriopriately
@@ -38,7 +37,7 @@ struct SegTree
 			lazy[node*2] = lazy[node];
 			lazy[node*2 + 1] = lazy[node]; 
 		}
-		st[node].mn = lazy[node];
+		st[node].val = lazy[node];
 		cLazy[node] = 0;
 	}
 
@@ -46,7 +45,7 @@ struct SegTree
 	{
 		if(L==R)
 		{
-			st[node].mn = 1e9;
+			st[node].val = 0;
 			return;
 		}
 		int M=(L + R)/2;
@@ -142,9 +141,3 @@ struct SegTree
 		Update(1, 1, N, l, r, val);
 	}
 };
-
-//Problem 1 (Max Query - Point Update with Coordinate Compression): http://codeforces.com/gym/100733/problem/F
-//Solution 1: http://codeforces.com/gym/100733/submission/41643795
-
-//Problem 2 (Min Query - Offline processing): https://codeforces.com/problemset/problem/522/D
-//Solution 2: https://codeforces.com/contest/522/submission/45493164
